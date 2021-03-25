@@ -77,7 +77,7 @@ describe('03_separation-of-concerns-demo routes', () => {
       });
   });
 
-  it('updates order with id in our database', async () => {
+  it('updates order with id in our database and sends a text message', async () => {
     const res = await request(app)
       .post('/api/v1/orders')
       .send({ quantity: 23 });
@@ -93,7 +93,7 @@ describe('03_separation-of-concerns-demo routes', () => {
       });
   });
 
-  it('updates order with id in our database', async () => {
+  it('deletes order with id in our database and sends a text message', async () => {
     const res = await request(app)
       .post('/api/v1/orders')
       .send({ quantity: 35 });
