@@ -43,14 +43,14 @@ describe('03_separation-of-concerns-demo routes', () => {
       .post('/api/v1/orders')
       .send({ quantity: 10 });
 
-    const res = await request(app)
+    const secondRes = await request(app)
       .post('/api/v1/orders')
       .send({ quantity: 33 });
 
-    const res = await request(app)
+    const thirdRes = await request(app)
       .get('/api/v1/orders');
 
-    expect(res.body).toEqual([
+    expect(thirdRes.body).toEqual([
       {
         id: '1',
         quantity: 10,
@@ -67,13 +67,29 @@ describe('03_separation-of-concerns-demo routes', () => {
       .post('/api/v1/orders')
       .send({ quantity: 23 });
 
-    const res = await request(app)
+    const secondRes = await request(app)
       .get('/api/v1/orders/1');
 
-    expect(res.body).toEqual(
+    expect(secondRes.body).toEqual(
       {
         id: '1',
         quantity: 23,
+      });
+  });
+
+  it('updates order with id in our database', async () => {
+    const res = await request(app)
+      .post('/api/v1/orders')
+      .send({ quantity: 23 });
+
+    const secondRes = await request(app)
+      .put('/api/v1/orders/1')
+      .send({ quantity: 7 });
+
+    expect(secondRes.body).toEqual(
+      {
+        id: '1',
+        quantity: 7,
       });
   });
 });
